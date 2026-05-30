@@ -17,15 +17,20 @@ export class HbarKitError extends Error {
   }
   /** Walk the cause chain; returns the first error matching fn, or the deepest cause. */
   walk(fn?: (err: unknown) => boolean): unknown {
-    let current: unknown = this
-    while (current) {
-      if (fn?.(current)) return current
-      const next: unknown = (current as { cause?: unknown }).cause
-      if (!next) return fn ? null : current
-      current = next
-    }
-    return null
+    return walkCauseChain(this, fn)
   }
+}
+
+/** Walk an error's cause chain; returns the first match for fn, or the deepest cause. */
+function walkCauseChain(start: unknown, fn?: (err: unknown) => boolean): unknown {
+  let current: unknown = start
+  while (current) {
+    if (fn?.(current)) return current
+    const next: unknown = (current as { cause?: unknown }).cause
+    if (!next) return fn ? null : current
+    current = next
+  }
+  return null
 }
 
 export class MirrorHttpError extends HbarKitError {
