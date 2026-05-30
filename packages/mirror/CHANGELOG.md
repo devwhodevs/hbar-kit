@@ -1,0 +1,14 @@
+# @hbar-kit/mirror
+
+## 0.1.0
+
+### Minor Changes
+
+- [`a01f541`](https://github.com/devwhodevs/hbar-kit/commit/a01f5416debb96104573e5d38151500da817814c) Thanks [@devwhodevs](https://github.com/devwhodevs)! - Initial release: typed Hedera Mirror Node REST client with retry-aware transport, lossless
+  bigint parsing, links.next pagination, response normalization, and transactions/accounts/
+  tokens/balances resources.
+
+### Patch Changes
+
+- Updated dependencies [[`5609356`](https://github.com/devwhodevs/hbar-kit/commit/5609356da8b07af1734809df61ee147e1e7fca5c)]:
+  - @hbar-kit/core@0.1.0
