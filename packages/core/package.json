@@ -1,0 +1,43 @@
+{
+  "name": "@hbar-kit/core",
+  "version": "0.0.0",
+  "description": "Zero-dependency primitives for hbar-kit: network config, bigint money, id/timestamp parsing, errors.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "src", "!src/**/*.test.ts", "!src/**/*.test-d.ts"],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "check:publish": "publint --strict && attw --pack ."
+  },
+  "peerDependencies": {
+    "@hashgraph/sdk": ">=2.63",
+    "@hiero-ledger/sdk": ">=2.79"
+  },
+  "peerDependenciesMeta": {
+    "@hashgraph/sdk": { "optional": true },
+    "@hiero-ledger/sdk": { "optional": true }
+  },
+  "devDependencies": { "typescript": "catalog:", "vitest": "catalog:" },
+  "publishConfig": { "access": "public" }
+}
