@@ -1,6 +1,6 @@
 {
   "name": "@hbar-kit/payments",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Business-level HBAR/HTS payment verification on top of @hbar-kit/mirror.",
   "license": "MIT",
   "homepage": "https://devwhodevs.github.io/hbar-kit/",

@@ -1,6 +1,6 @@
 {
   "name": "@hbar-kit/core",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Zero-dependency primitives for hbar-kit: network config, bigint money, id/timestamp parsing, errors.",
   "license": "MIT",
   "homepage": "https://devwhodevs.github.io/hbar-kit/",
