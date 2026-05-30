@@ -11,6 +11,7 @@
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",
+    "coverage": "turbo run coverage",
     "format": "prettier --write .",
     "check:publish": "turbo run check:publish",
     "changeset": "changeset",
