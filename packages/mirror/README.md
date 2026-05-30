@@ -8,7 +8,10 @@ import { createMirrorClient } from "@hbar-kit/mirror"
 
 const mirror = createMirrorClient({ network: "testnet" })
 const page = await mirror.transactions.find({
-  accountId: "0.0.8093816", transactionType: "cryptotransfer", result: "success", limit: 25,
+  accountId: "0.0.8093816",
+  transactionType: "cryptotransfer",
+  result: "success",
+  limit: 25,
 })
 for (const tx of page.items) console.log(tx.transactionId, tx.memo, tx.transfers)
 ```

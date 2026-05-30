@@ -14,10 +14,16 @@ describe("createMirrorClient", () => {
     expect(() => createMirrorClient({})).toThrowError(/network.*required/i)
   })
   it("passes a custom fetch through to the transport", async () => {
-    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ transactions: [], links: { next: null } }), { status: 200 }))
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(
+        new Response(JSON.stringify({ transactions: [], links: { next: null } }), { status: 200 }),
+      )
     const client = createMirrorClient({ network: "testnet", fetch: fetchMock })
     await client.transactions.find({ accountId: "0.0.1" })
     expect(fetchMock).toHaveBeenCalledOnce()
-    expect(fetchMock.mock.calls[0]![0]).toContain("https://testnet.mirrornode.hedera.com/api/v1/transactions")
+    expect(fetchMock.mock.calls[0]![0]).toContain(
+      "https://testnet.mirrornode.hedera.com/api/v1/transactions",
+    )
   })
 })

@@ -12,9 +12,12 @@ const result = await verifyHbarPayment({
 })
 
 switch (result.status) {
-  case "confirmed": break
-  case "underpaid": break
-  case "pending": break
+  case "confirmed":
+    break
+  case "underpaid":
+    break
+  case "pending":
+    break
 }
 ```
 

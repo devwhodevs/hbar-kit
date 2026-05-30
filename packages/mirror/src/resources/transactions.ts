@@ -33,12 +33,19 @@ function buildQuery(params: FindTransactionsParams): string {
 export function createTransactionsResource(transport: Transport): TransactionsResource {
   return {
     async find(params = {}) {
-      const body = (await transport.get(`/api/v1/transactions?${buildQuery(params)}`)) as RawTransactionList
-      return { items: (body.transactions ?? []).map(normalizeTransaction), next: body.links?.next ?? null }
+      const body = (await transport.get(
+        `/api/v1/transactions?${buildQuery(params)}`,
+      )) as RawTransactionList
+      return {
+        items: (body.transactions ?? []).map(normalizeTransaction),
+        next: body.links?.next ?? null,
+      }
     },
     async get(transactionId) {
       const id = txIdToMirror(transactionId)
-      const body = (await transport.get(`/api/v1/transactions/${id}`)) as { transactions?: RawTransaction[] }
+      const body = (await transport.get(`/api/v1/transactions/${id}`)) as {
+        transactions?: RawTransaction[]
+      }
       return (body.transactions ?? []).map(normalizeTransaction)
     },
   }

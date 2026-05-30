@@ -15,8 +15,17 @@ const wallet = createWalletClient({
   metadata: { name: "Shop", description: "Demo", url: "https://shop.test", icons: [] },
 })
 
-const { transactionId } = await wallet.transfer({ to: "0.0.12345", amount: 100_000_000n, memo: "order-42" })
-const result = await verifyHbarPayment({ network: "testnet", receiver: "0.0.12345", amount: "1", memo: "order-42" })
+const { transactionId } = await wallet.transfer({
+  to: "0.0.12345",
+  amount: 100_000_000n,
+  memo: "order-42",
+})
+const result = await verifyHbarPayment({
+  network: "testnet",
+  receiver: "0.0.12345",
+  amount: "1",
+  memo: "order-42",
+})
 ```
 
 **Why confirm separately?** Wallets disagree on whether execution waits for a receipt, so the returned

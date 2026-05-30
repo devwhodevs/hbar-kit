@@ -1,9 +1,17 @@
 import {
-  parseUnits, parseHbar, formatUnits, type HederaNetwork, type NetworkInput, InvalidParamsError,
+  parseUnits,
+  parseHbar,
+  formatUnits,
+  type HederaNetwork,
+  type NetworkInput,
+  InvalidParamsError,
 } from "@hbar-kit/core"
 import {
-  createMirrorClient, normalizeTransaction,
-  type MirrorClient, type RawTransaction, type Transaction,
+  createMirrorClient,
+  normalizeTransaction,
+  type MirrorClient,
+  type RawTransaction,
+  type Transaction,
 } from "@hbar-kit/mirror"
 import { netToReceiver, memoMatches, classifyAmount } from "./match.js"
 import { hashscanTxUrl } from "./explorer.js"
@@ -28,11 +36,17 @@ export interface VerifyHtsParams extends VerifyBaseParams {
 const tokenDecimalsCache = new Map<string, number>()
 
 function resolveClient(p: VerifyBaseParams): { client: MirrorClient; network: HederaNetwork } {
-  return { client: p.client ?? createMirrorClient(p), network: (p.network ?? "mainnet") as HederaNetwork }
+  return {
+    client: p.client ?? createMirrorClient(p),
+    network: (p.network ?? "mainnet") as HederaNetwork,
+  }
 }
 
 async function runVerify(
-  p: VerifyBaseParams, asset: PaymentAsset, expectedBase: bigint, decimals: number,
+  p: VerifyBaseParams,
+  asset: PaymentAsset,
+  expectedBase: bigint,
+  decimals: number,
 ): Promise<PaymentResult> {
   if (p.after && p.before && new Date(p.after) > new Date(p.before)) {
     throw new InvalidParamsError("`after` must be before `before`")
@@ -47,7 +61,9 @@ async function runVerify(
       const net = netToReceiver(tx, p.receiver, asset)
       if (net <= 0n) continue
       if (tokenId && !tx.tokenTransfers.some((t) => t.tokenId === tokenId)) continue
-      const payer = tx.transfers.find((t) => t.amount < 0n)?.account ?? tx.tokenTransfers.find((t) => t.amount < 0n)?.account
+      const payer =
+        tx.transfers.find((t) => t.amount < 0n)?.account ??
+        tx.tokenTransfers.find((t) => t.amount < 0n)?.account
       const match: PaymentMatch = {
         transactionId: tx.transactionId,
         consensusTimestamp: tx.consensusTimestamp.raw,
@@ -62,14 +78,20 @@ async function runVerify(
   }
 
   const findParams: Parameters<typeof client.transactions.find>[0] = {
-    accountId: p.receiver, transactionType: "cryptotransfer", result: "success", order: "desc",
+    accountId: p.receiver,
+    transactionType: "cryptotransfer",
+    result: "success",
+    order: "desc",
   }
   if (p.after !== undefined) findParams.after = p.after
   if (p.before !== undefined) findParams.before = p.before
   let page = await client.transactions.find(findParams)
   collect(page.items)
   while (page.next) {
-    const body = (await client.transport.get(page.next)) as { transactions?: RawTransaction[]; links?: { next: string | null } }
+    const body = (await client.transport.get(page.next)) as {
+      transactions?: RawTransaction[]
+      links?: { next: string | null }
+    }
     collect((body.transactions ?? []).map(normalizeTransaction))
     page = { items: [], next: body.links?.next ?? null }
   }
@@ -79,19 +101,40 @@ async function runVerify(
     : candidates
 
   const fail = (status: PaymentResult["status"], reason: string): PaymentResult => ({
-    matched: false, status, receiver: p.receiver, asset, matches: memoFiltered, reason,
+    matched: false,
+    status,
+    receiver: p.receiver,
+    asset,
+    matches: memoFiltered,
+    reason,
   })
-  if (candidates.length === 0) return fail("pending", "no matching transactions for receiver in window")
-  if (p.memo && memoFiltered.length === 0) return fail("mismatch", "no transaction matched the expected memo")
+  if (candidates.length === 0)
+    return fail("pending", "no matching transactions for receiver in window")
+  if (p.memo && memoFiltered.length === 0)
+    return fail("mismatch", "no transaction matched the expected memo")
 
   const wantAtLeast = p.comparison === "atLeast"
-  const satisfying = memoFiltered.filter((c) => (wantAtLeast ? c.netBase >= expectedBase : c.netBase === expectedBase))
+  const satisfying = memoFiltered.filter((c) =>
+    wantAtLeast ? c.netBase >= expectedBase : c.netBase === expectedBase,
+  )
 
-  const resultFrom = (m: PaymentMatch, status: PaymentResult["status"], matched: boolean, matches: PaymentMatch[], reason?: string): PaymentResult => {
+  const resultFrom = (
+    m: PaymentMatch,
+    status: PaymentResult["status"],
+    matched: boolean,
+    matches: PaymentMatch[],
+    reason?: string,
+  ): PaymentResult => {
     const result: PaymentResult = {
-      matched, status, receiver: p.receiver, asset,
-      transactionId: m.transactionId, amountBase: m.netBase, amount: m.net,
-      memo: m.memo, consensusTimestamp: m.consensusTimestamp,
+      matched,
+      status,
+      receiver: p.receiver,
+      asset,
+      transactionId: m.transactionId,
+      amountBase: m.netBase,
+      amount: m.net,
+      memo: m.memo,
+      consensusTimestamp: m.consensusTimestamp,
       explorerUrl: hashscanTxUrl(network, m.consensusTimestamp, m.transactionId),
       matches,
     }
@@ -103,10 +146,22 @@ async function runVerify(
   if (satisfying.length === 0) {
     const best = memoFiltered[0]!
     const cls = classifyAmount(best.netBase, expectedBase)
-    return resultFrom(best, cls === "exact" ? "confirmed" : cls, false, memoFiltered, `amount ${cls}`)
+    return resultFrom(
+      best,
+      cls === "exact" ? "confirmed" : cls,
+      false,
+      memoFiltered,
+      `amount ${cls}`,
+    )
   }
   if (satisfying.length > 1) {
-    return resultFrom(satisfying[0]!, "duplicate", false, satisfying, `${satisfying.length} transactions satisfy this request`)
+    return resultFrom(
+      satisfying[0]!,
+      "duplicate",
+      false,
+      satisfying,
+      `${satisfying.length} transactions satisfy this request`,
+    )
   }
   return resultFrom(satisfying[0]!, "confirmed", true, satisfying)
 }

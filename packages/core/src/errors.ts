@@ -51,31 +51,37 @@ export class RateLimitError extends MirrorHttpError {
 }
 export class NotFoundError extends HbarKitError {
   constructor(message: string, opts?: HbarKitErrorOptions) {
-    super(message, opts); this.name = "NotFoundError"
+    super(message, opts)
+    this.name = "NotFoundError"
   }
 }
 export class TimeoutError extends HbarKitError {
   constructor(message: string, opts?: HbarKitErrorOptions) {
-    super(message, opts); this.name = "TimeoutError"
+    super(message, opts)
+    this.name = "TimeoutError"
   }
 }
 export class NetworkError extends HbarKitError {
   constructor(message: string, opts?: HbarKitErrorOptions) {
-    super(message, opts); this.name = "NetworkError"
+    super(message, opts)
+    this.name = "NetworkError"
   }
 }
 export class InvalidAmountError extends HbarKitError {
   constructor(message: string, opts?: HbarKitErrorOptions) {
-    super(message, opts); this.name = "InvalidAmountError"
+    super(message, opts)
+    this.name = "InvalidAmountError"
   }
 }
 export class InvalidParamsError extends HbarKitError {
   constructor(message: string, opts?: HbarKitErrorOptions) {
-    super(message, opts); this.name = "InvalidParamsError"
+    super(message, opts)
+    this.name = "InvalidParamsError"
   }
 }
 export class PaymentVerificationError extends HbarKitError {
   constructor(message: string, opts?: HbarKitErrorOptions) {
-    super(message, opts); this.name = "PaymentVerificationError"
+    super(message, opts)
+    this.name = "PaymentVerificationError"
   }
 }

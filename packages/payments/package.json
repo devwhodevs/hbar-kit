@@ -3,9 +3,29 @@
   "version": "0.0.0",
   "description": "Business-level HBAR/HTS payment verification on top of @hbar-kit/mirror.",
   "license": "MIT",
+  "homepage": "https://devwhodevs.github.io/hbar-kit/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devwhodevs/hbar-kit.git",
+    "directory": "packages/payments"
+  },
+  "bugs": "https://github.com/devwhodevs/hbar-kit/issues",
+  "keywords": [
+    "hedera",
+    "hbar",
+    "hts",
+    "payments",
+    "payment-verification",
+    "mirror-node",
+    "typescript"
+  ],
   "type": "module",
   "sideEffects": false,
-  "files": ["dist", "src", "!src/**/*.test.ts"],
+  "files": [
+    "dist",
+    "src",
+    "!src/**/*.test.ts"
+  ],
   "exports": {
     ".": {
       "import": {
@@ -29,7 +49,15 @@
     "lint": "eslint src",
     "check:publish": "publint --strict && attw --pack ."
   },
-  "dependencies": { "@hbar-kit/core": "workspace:*", "@hbar-kit/mirror": "workspace:*" },
-  "devDependencies": { "typescript": "catalog:", "vitest": "catalog:" },
-  "publishConfig": { "access": "public" }
+  "dependencies": {
+    "@hbar-kit/core": "workspace:*",
+    "@hbar-kit/mirror": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

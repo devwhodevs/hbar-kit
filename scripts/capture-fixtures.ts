@@ -23,9 +23,6 @@ await mkdir(resolve("fixtures/captured"), { recursive: true })
 for (const [name, path] of Object.entries(endpoints)) {
   const res = await fetch(base + path)
   const json = await res.json()
-  await writeFile(
-    resolve(`fixtures/captured/${name}.json`),
-    JSON.stringify(json, null, 2),
-  )
+  await writeFile(resolve(`fixtures/captured/${name}.json`), JSON.stringify(json, null, 2))
   console.log(`captured ${name} -> fixtures/captured/${name}.json`)
 }

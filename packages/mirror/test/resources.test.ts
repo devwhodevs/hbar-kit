@@ -6,8 +6,12 @@ import { createAccountsResource } from "../src/resources/accounts.js"
 import { createTokensResource } from "../src/resources/tokens.js"
 import type { Transport } from "../src/transport.js"
 
-const raw = (name: string) => readFileSync(fileURLToPath(new URL(`./fixtures/${name}`, import.meta.url)), "utf8")
-const transport = (handler: (p: string) => unknown): Transport => ({ baseUrl: "https://x.test", get: vi.fn(async (p) => handler(p)) })
+const raw = (name: string) =>
+  readFileSync(fileURLToPath(new URL(`./fixtures/${name}`, import.meta.url)), "utf8")
+const transport = (handler: (p: string) => unknown): Transport => ({
+  baseUrl: "https://x.test",
+  get: vi.fn(async (p) => handler(p)),
+})
 
 describe("accounts.getBalance", () => {
   it("returns tinybar balance and token balances", async () => {
@@ -21,7 +25,10 @@ describe("accounts.getBalance", () => {
 describe("accounts.isAssociated", () => {
   it("is true when /accounts/{id}/tokens returns a row", async () => {
     let captured = ""
-    const t = transport((p) => { captured = p; return { tokens: [{ token_id: "0.0.5449", balance: 1, decimals: 6 }], links: { next: null } } })
+    const t = transport((p) => {
+      captured = p
+      return { tokens: [{ token_id: "0.0.5449", balance: 1, decimals: 6 }], links: { next: null } }
+    })
     expect(await createAccountsResource(t).isAssociated("0.0.1", "0.0.5449")).toBe(true)
     expect(captured).toContain("/api/v1/accounts/0.0.1/tokens?token.id=0.0.5449")
   })

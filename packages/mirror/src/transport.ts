@@ -43,7 +43,10 @@ export function http(baseUrl: string, options: TransportOptions = {}): Transport
         }
         if (RETRYABLE.has(response.status) && attempt < retryCount) {
           const retryAfter = Number(response.headers.get("retry-after"))
-          const wait = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : jitter(retryDelay * 2 ** attempt)
+          const wait =
+            Number.isFinite(retryAfter) && retryAfter > 0
+              ? retryAfter * 1000
+              : jitter(retryDelay * 2 ** attempt)
           await sleep(wait)
           attempt++
           continue
@@ -56,7 +59,9 @@ export function http(baseUrl: string, options: TransportOptions = {}): Transport
             Number.isFinite(ra) ? { details: body, retryAfter: ra } : { details: body },
           )
         }
-        throw new MirrorHttpError(`Mirror Node HTTP ${response.status}`, response.status, { details: body })
+        throw new MirrorHttpError(`Mirror Node HTTP ${response.status}`, response.status, {
+          details: body,
+        })
       } catch (err) {
         clearTimeout(timer)
         if (err instanceof MirrorHttpError) throw err
