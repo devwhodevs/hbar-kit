@@ -9,9 +9,15 @@ jobs:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: pnpm, registry-url: "https://registry.npmjs.org" }
+        with: { node-version: 20, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      # Write the npm auth token ourselves so it is unambiguously used at publish
+      # time (avoids the setup-node registry-url / NODE_AUTH_TOKEN mismatch).
+      - run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > "$HOME/.npmrc"
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - uses: changesets/action@v1
         with: { publish: pnpm release }
         env:
