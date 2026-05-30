@@ -1,0 +1,35 @@
+{
+  "name": "@hbar-kit/mirror",
+  "version": "0.0.0",
+  "description": "Typed Hedera Mirror Node REST client.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "src", "!src/**/*.test.ts"],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "check:publish": "publint --strict && attw --pack ."
+  },
+  "dependencies": { "@hbar-kit/core": "workspace:*" },
+  "devDependencies": { "typescript": "catalog:", "vitest": "catalog:" },
+  "publishConfig": { "access": "public" }
+}

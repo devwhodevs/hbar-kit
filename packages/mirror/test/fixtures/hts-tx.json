@@ -1,0 +1,23 @@
+{
+  "charged_tx_fee": 993067,
+  "consensus_timestamp": "1780150231.356942024",
+  "memo_base64": "b3JkZXJfNjQ3MTcyNzE1MzIwNg==",
+  "name": "CRYPTOTRANSFER",
+  "nft_transfers": [],
+  "node": "0.0.4",
+  "nonce": 0,
+  "parent_consensus_timestamp": null,
+  "result": "SUCCESS",
+  "scheduled": false,
+  "token_transfers": [
+    { "token_id": "0.0.5449", "account": "0.0.6628041", "amount": -2889029, "is_approval": false },
+    { "token_id": "0.0.5449", "account": "0.0.8093816", "amount": 2889029, "is_approval": false }
+  ],
+  "transaction_hash": "vQjqaaX7mbYpRnSrseG2jxEfSXorML+F7Au7QYnY9lhRvuP3pz3itguut/ai664m",
+  "transaction_id": "0.0.6628041-1780150227-066757561",
+  "transfers": [
+    { "account": "0.0.802", "amount": 993067, "is_approval": false },
+    { "account": "0.0.6628041", "amount": -993067, "is_approval": false }
+  ],
+  "valid_start_timestamp": "1780150227.066757561"
+}
