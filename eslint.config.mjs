@@ -1,19 +1,29 @@
-import js from "@eslint/js"
-import tseslint from "typescript-eslint"
+// eslint.config.mjs
+import tsParser from "@typescript-eslint/parser"
+import tsPlugin from "@typescript-eslint/eslint-plugin"
 
-export default tseslint.config(
-  { ignores: ["**/dist/**", "**/node_modules/**", "**/coverage/**", "**/*.config.*"] },
-  js.configs.recommended,
+export default [
   {
-    files: ["**/*.ts"],
+    ignores: [
+      "**/dist/**",
+      "**/coverage/**",
+      "**/*.config.*",
+      "**/.vitepress/**",
+      "**/.next/**",
+      "**/node_modules/**",
+    ],
+  },
+  {
+    files: ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
     languageOptions: {
-      parser: tseslint.parser,
+      parser: tsParser,
+      parserOptions: { ecmaVersion: 2022, sourceType: "module" },
     },
-    plugins: { "@typescript-eslint": tseslint.plugin },
+    plugins: { "@typescript-eslint": tsPlugin },
     rules: {
+      ...tsPlugin.configs.recommended.rules,
       "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/no-this-alias": "off",
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/consistent-type-imports": "error",
     },
   },
-)
+]
