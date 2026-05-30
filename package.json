@@ -15,7 +15,8 @@
     "check:publish": "turbo run check:publish",
     "changeset": "changeset",
     "version": "changeset version",
-    "release": "turbo run build && changeset publish"
+    "release": "turbo run build && changeset publish",
+    "capture:fixtures": "tsx scripts/capture-fixtures.ts"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.0",
