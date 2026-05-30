@@ -10,12 +10,17 @@ describe("parseJsonWithBigInt", () => {
     expect(typeof out.transfers[0]!.amount).toBe("bigint")
   })
   it("leaves non-amount numbers as numbers", () => {
-    const out = parseJsonWithBigInt('{"nonce":0,"decimals":6}') as { nonce: number; decimals: number }
+    const out = parseJsonWithBigInt('{"nonce":0,"decimals":6}') as {
+      nonce: number
+      decimals: number
+    }
     expect(out.nonce).toBe(0)
     expect(typeof out.nonce).toBe("number")
   })
   it("keeps string fields as strings", () => {
-    const out = parseJsonWithBigInt('{"consensus_timestamp":"1780150231.80"}') as { consensus_timestamp: string }
+    const out = parseJsonWithBigInt('{"consensus_timestamp":"1780150231.80"}') as {
+      consensus_timestamp: string
+    }
     expect(out.consensus_timestamp).toBe("1780150231.80")
   })
 })

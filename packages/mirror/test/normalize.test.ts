@@ -5,7 +5,9 @@ import { normalizeTransaction, normalizeToken, isNotFound } from "../src/normali
 import { parseJsonWithBigInt } from "../src/json.js"
 
 const fx = (name: string) =>
-  parseJsonWithBigInt(readFileSync(fileURLToPath(new URL(`./fixtures/${name}`, import.meta.url)), "utf8"))
+  parseJsonWithBigInt(
+    readFileSync(fileURLToPath(new URL(`./fixtures/${name}`, import.meta.url)), "utf8"),
+  )
 
 describe("normalizeTransaction", () => {
   it("decodes memo, parses timestamps, camelCases transfers", () => {
@@ -31,7 +33,13 @@ describe("normalizeToken", () => {
     expect(t.symbol).toBe("USDC")
   })
   it("accepts numeric decimals (token list shape)", () => {
-    const t = normalizeToken({ token_id: "0.0.5449", decimals: 6, symbol: "USDC", name: "USD Coin", type: "FUNGIBLE_COMMON" } as never)
+    const t = normalizeToken({
+      token_id: "0.0.5449",
+      decimals: 6,
+      symbol: "USDC",
+      name: "USD Coin",
+      type: "FUNGIBLE_COMMON",
+    } as never)
     expect(t.decimals).toBe(6)
   })
 })

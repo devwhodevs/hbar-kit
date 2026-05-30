@@ -4,6 +4,10 @@ export default defineConfig({
   test: {
     include: ["test/**/*.test.ts"],
     typecheck: { enabled: true, include: ["test/**/*.test-d.ts"] },
-    coverage: { provider: "v8", include: ["src/**/*.ts"], exclude: ["src/index.ts", "src/types.ts"] },
+    coverage: {
+      provider: "v8",
+      include: ["src/**/*.ts"],
+      exclude: ["src/index.ts", "src/types.ts"],
+    },
   },
 })

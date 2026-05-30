@@ -1,6 +1,9 @@
 import { describe, it, expect } from "vitest"
 import {
-  HbarKitError, InvalidAmountError, InvalidParamsError, NotFoundError,
+  HbarKitError,
+  InvalidAmountError,
+  InvalidParamsError,
+  NotFoundError,
 } from "../src/errors.js"
 
 describe("error hierarchy", () => {

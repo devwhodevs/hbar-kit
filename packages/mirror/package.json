@@ -3,9 +3,28 @@
   "version": "0.0.0",
   "description": "Typed Hedera Mirror Node REST client.",
   "license": "MIT",
+  "homepage": "https://devwhodevs.github.io/hbar-kit/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devwhodevs/hbar-kit.git",
+    "directory": "packages/mirror"
+  },
+  "bugs": "https://github.com/devwhodevs/hbar-kit/issues",
+  "keywords": [
+    "hedera",
+    "hbar",
+    "hts",
+    "mirror-node",
+    "rest",
+    "typescript"
+  ],
   "type": "module",
   "sideEffects": false,
-  "files": ["dist", "src", "!src/**/*.test.ts"],
+  "files": [
+    "dist",
+    "src",
+    "!src/**/*.test.ts"
+  ],
   "exports": {
     ".": {
       "import": {
@@ -29,7 +48,14 @@
     "lint": "eslint src",
     "check:publish": "publint --strict && attw --pack ."
   },
-  "dependencies": { "@hbar-kit/core": "workspace:*" },
-  "devDependencies": { "typescript": "catalog:", "vitest": "catalog:" },
-  "publishConfig": { "access": "public" }
+  "dependencies": {
+    "@hbar-kit/core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

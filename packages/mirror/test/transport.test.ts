@@ -14,7 +14,10 @@ describe("http transport", () => {
   })
 
   it("retries on 503 then succeeds", async () => {
-    const fetchMock = vi.fn().mockResolvedValueOnce(res(503, "busy")).mockResolvedValueOnce(res(200, { ok: 1 }))
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(res(503, "busy"))
+      .mockResolvedValueOnce(res(200, { ok: 1 }))
     const t = http("https://x.test", { fetch: fetchMock, retryCount: 2, retryDelay: 0 })
     expect(await t.get("/y")).toEqual({ ok: 1 })
     expect(fetchMock).toHaveBeenCalledTimes(2)
@@ -28,7 +31,9 @@ describe("http transport", () => {
   })
 
   it("throws MirrorHttpError on a non-retryable 400", async () => {
-    const fetchMock = vi.fn().mockResolvedValue(res(400, { _status: { messages: [{ message: "bad" }] } }))
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(res(400, { _status: { messages: [{ message: "bad" }] } }))
     const t = http("https://x.test", { fetch: fetchMock, retryCount: 3, retryDelay: 0 })
     await expect(t.get("/z")).rejects.toBeInstanceOf(MirrorHttpError)
     expect(fetchMock).toHaveBeenCalledOnce()
@@ -38,7 +43,9 @@ describe("http transport", () => {
     const fetchMock = vi.fn().mockImplementation(
       (_url: string, init: RequestInit) =>
         new Promise((_resolve, reject) => {
-          init.signal?.addEventListener("abort", () => reject(new DOMException("Aborted", "AbortError")))
+          init.signal?.addEventListener("abort", () =>
+            reject(new DOMException("Aborted", "AbortError")),
+          )
         }),
     )
     const t = http("https://x.test", { fetch: fetchMock, timeout: 5, retryCount: 0 })

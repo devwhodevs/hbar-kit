@@ -7,7 +7,7 @@ const result = await verifyHtsPayment({
   network: "testnet",
   receiver: "0.0.12345",
   tokenId: "0.0.5449",
-  decimals: 6,          // optional — auto-fetched if omitted
+  decimals: 6, // optional — auto-fetched if omitted
   amount: "25.00",
   memo: "invoice_456",
   after: new Date(Date.now() - 30 * 60 * 1000),

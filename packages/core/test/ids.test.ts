@@ -28,9 +28,7 @@ describe("transaction id conversion", () => {
     )
   })
   it("converts Mirror dash-form back to SDK @-form", () => {
-    expect(txIdToSdk("0.0.4660654-1748625594-027894000")).toBe(
-      "0.0.4660654@1748625594.027894000",
-    )
+    expect(txIdToSdk("0.0.4660654-1748625594-027894000")).toBe("0.0.4660654@1748625594.027894000")
   })
   it("throws on malformed tx id", () => {
     expect(() => txIdToMirror("garbage")).toThrowError(/invalid transaction id/i)

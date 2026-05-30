@@ -11,7 +11,7 @@ import { getRequest } from "@/lib/store"
 
 export const { GET } = createPaymentCheckHandler({
   network: "testnet",
-  loadRequest: (id) => getRequest(id),  // amount derived server-side, never from the client
+  loadRequest: (id) => getRequest(id), // amount derived server-side, never from the client
 })
 ```
 

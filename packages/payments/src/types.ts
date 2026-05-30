@@ -1,8 +1,14 @@
 import type { Transaction } from "@hbar-kit/mirror"
 
 export type PaymentStatus =
-  | "confirmed" | "pending" | "underpaid" | "overpaid"
-  | "duplicate" | "mismatch" | "expired" | "failed"
+  | "confirmed"
+  | "pending"
+  | "underpaid"
+  | "overpaid"
+  | "duplicate"
+  | "mismatch"
+  | "expired"
+  | "failed"
 
 export type PaymentAsset = "HBAR" | { tokenId: string; decimals: number }
 
@@ -32,4 +38,6 @@ export interface PaymentResult {
   reason?: string
 }
 
-export interface MemoComparison { mode?: "exact" | "trim" | "caseInsensitive" }
+export interface MemoComparison {
+  mode?: "exact" | "trim" | "caseInsensitive"
+}

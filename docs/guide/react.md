@@ -13,7 +13,7 @@ function Balance({ accountId }: { accountId: string }) {
 }
 
 function Status({ transactionId }: { transactionId: string }) {
-  const { data } = usePaymentStatus({ transactionId })  // polls until terminal
+  const { data } = usePaymentStatus({ transactionId }) // polls until terminal
   return <span>{data?.status}</span>
 }
 ```

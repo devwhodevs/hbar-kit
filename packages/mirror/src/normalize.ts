@@ -1,16 +1,23 @@
 import { parseTimestamp } from "@hbar-kit/core"
 import type {
-  RawTransaction, Transaction, RawToken, Token, RawAccount, AccountBalance, RawStatus,
+  RawTransaction,
+  Transaction,
+  RawToken,
+  Token,
+  RawAccount,
+  AccountBalance,
+  RawStatus,
 } from "./types.js"
 
-const decodeMemo = (b64: string): string =>
-  b64 ? Buffer.from(b64, "base64").toString("utf8") : ""
+const decodeMemo = (b64: string): string => (b64 ? Buffer.from(b64, "base64").toString("utf8") : "")
 
 export function normalizeTransaction(raw: RawTransaction): Transaction {
   return {
     transactionId: raw.transaction_id,
     consensusTimestamp: parseTimestamp(raw.consensus_timestamp),
-    validStartTimestamp: raw.valid_start_timestamp ? parseTimestamp(raw.valid_start_timestamp) : undefined,
+    validStartTimestamp: raw.valid_start_timestamp
+      ? parseTimestamp(raw.valid_start_timestamp)
+      : undefined,
     result: raw.result,
     name: raw.name,
     chargedTxFee: raw.charged_tx_fee,
@@ -19,14 +26,22 @@ export function normalizeTransaction(raw: RawTransaction): Transaction {
     scheduled: raw.scheduled,
     parentConsensusTimestamp: raw.parent_consensus_timestamp,
     transfers: (raw.transfers ?? []).map((t) => ({
-      account: t.account, amount: t.amount, isApproval: t.is_approval ?? false,
+      account: t.account,
+      amount: t.amount,
+      isApproval: t.is_approval ?? false,
     })),
     tokenTransfers: (raw.token_transfers ?? []).map((t) => ({
-      tokenId: t.token_id, account: t.account, amount: t.amount, isApproval: t.is_approval ?? false,
+      tokenId: t.token_id,
+      account: t.account,
+      amount: t.amount,
+      isApproval: t.is_approval ?? false,
     })),
     nftTransfers: (raw.nft_transfers ?? []).map((t) => ({
-      tokenId: t.token_id, sender: t.sender_account_id, receiver: t.receiver_account_id,
-      serial: t.serial_number, isApproval: t.is_approval ?? false,
+      tokenId: t.token_id,
+      sender: t.sender_account_id,
+      receiver: t.receiver_account_id,
+      serial: t.serial_number,
+      isApproval: t.is_approval ?? false,
     })),
     raw,
   }

@@ -1,6 +1,8 @@
 import type { Transport } from "./transport.js"
 
-export interface PaginateOptions { maxPages?: number }
+export interface PaginateOptions {
+  maxPages?: number
+}
 
 /** Async-iterate a list endpoint by following links.next verbatim until null. */
 export async function* paginate<T>(

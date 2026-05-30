@@ -12,12 +12,16 @@ export function createAccountsResource(transport: Transport): AccountsResource {
   return {
     async getBalance(accountId) {
       assertEntityId(accountId)
-      return normalizeAccountBalance((await transport.get(`/api/v1/accounts/${accountId}`)) as RawAccount)
+      return normalizeAccountBalance(
+        (await transport.get(`/api/v1/accounts/${accountId}`)) as RawAccount,
+      )
     },
     async isAssociated(accountId, tokenId) {
       assertEntityId(accountId)
       assertEntityId(tokenId)
-      const body = (await transport.get(`/api/v1/accounts/${accountId}/tokens?token.id=${tokenId}`)) as { tokens?: unknown[] }
+      const body = (await transport.get(
+        `/api/v1/accounts/${accountId}/tokens?token.id=${tokenId}`,
+      )) as { tokens?: unknown[] }
       return Array.isArray(body.tokens) && body.tokens.length > 0
     },
   }

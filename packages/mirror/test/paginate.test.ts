@@ -16,11 +16,19 @@ function fakeTransport(pages: Record<string, unknown>): Transport {
 describe("paginate", () => {
   it("follows links.next until null, yielding each page's items", async () => {
     const t = fakeTransport({
-      "/api/v1/transactions?account.id=0.0.1": { transactions: [{ id: 1 }], links: { next: "/api/v1/transactions?timestamp=lt:2" } },
+      "/api/v1/transactions?account.id=0.0.1": {
+        transactions: [{ id: 1 }],
+        links: { next: "/api/v1/transactions?timestamp=lt:2" },
+      },
       "/api/v1/transactions?timestamp=lt:2": { transactions: [{ id: 2 }], links: { next: null } },
     })
     const got: unknown[] = []
-    for await (const item of paginate(t, "/api/v1/transactions?account.id=0.0.1", (p: never) => (p as { transactions: unknown[] }).transactions)) got.push(item)
+    for await (const item of paginate(
+      t,
+      "/api/v1/transactions?account.id=0.0.1",
+      (p: never) => (p as { transactions: unknown[] }).transactions,
+    ))
+      got.push(item)
     expect(got).toEqual([{ id: 1 }, { id: 2 }])
   })
 
@@ -30,7 +38,13 @@ describe("paginate", () => {
       "/p2": { items: [2], links: { next: "/p3" } },
     })
     const got: number[] = []
-    for await (const n of paginate<number>(t, "/p", (p: never) => (p as { items: number[] }).items, { maxPages: 1 })) got.push(n)
+    for await (const n of paginate<number>(
+      t,
+      "/p",
+      (p: never) => (p as { items: number[] }).items,
+      { maxPages: 1 },
+    ))
+      got.push(n)
     expect(got).toEqual([1])
   })
 })
