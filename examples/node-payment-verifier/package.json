@@ -1,0 +1,17 @@
+{
+  "name": "@hbar-kit/example-node-payment-verifier",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "verify:hbar": "tsx src/verify-hbar.ts",
+    "verify:hts": "tsx src/verify-hts.ts"
+  },
+  "dependencies": {
+    "@hbar-kit/payments": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "catalog:"
+  }
+}
