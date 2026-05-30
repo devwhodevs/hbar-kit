@@ -1,6 +1,6 @@
 {
   "name": "@hbar-kit/mirror",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Typed Hedera Mirror Node REST client.",
   "license": "MIT",
   "homepage": "https://devwhodevs.github.io/hbar-kit/",
