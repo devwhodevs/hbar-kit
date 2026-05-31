@@ -1,5 +1,6 @@
 {
   "name": "hbar-kit",
+  "description": "TypeScript toolkit for verifying native Hedera payments (HBAR & HTS) and typed Mirror Node reads. Monorepo for @hbar-kit/core, /mirror, /payments.",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.32.1",

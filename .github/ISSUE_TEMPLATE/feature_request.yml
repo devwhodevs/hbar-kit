@@ -2,6 +2,20 @@ name: Feature request
 description: Suggest an idea or improvement for hbar-kit
 labels: ["enhancement"]
 body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of hbar-kit does this relate to?
+      options:
+        - Payment verification (verifyHbarPayment / verifyHtsPayment)
+        - Payment links / checkout / invoice flow
+        - Mirror Node client (@hbar-kit/mirror)
+        - Core primitives (amounts, ids, network)
+        - Docs or example request
+        - Other
+    validations:
+      required: true
   - type: textarea
     id: problem
     attributes:
