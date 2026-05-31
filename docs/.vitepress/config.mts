@@ -2,7 +2,8 @@ import { defineConfig } from "vitepress"
 
 export default defineConfig({
   title: "hbar-kit",
-  description: "viem-like DX for native Hedera apps",
+  description:
+    "TypeScript toolkit for verifying native Hedera payments (HBAR & HTS) by receiver, amount, memo, and time window via the Mirror Node — read-only, non-custodial, bigint-safe.",
   base: "/hbar-kit/",
   themeConfig: {
     nav: [
