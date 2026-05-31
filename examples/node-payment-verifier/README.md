@@ -22,10 +22,18 @@ pnpm --filter @hbar-kit/example-node-payment-verifier verify:hbar
 
 # Verify an HTS token payment
 pnpm --filter @hbar-kit/example-node-payment-verifier verify:hts
+
+# Verify a USDC payment
+pnpm --filter @hbar-kit/example-node-payment-verifier verify:usdc
 ```
 
-Each script prints `PAID` / `NOT PAID` plus the full `PaymentResult` (status, amount, payer), and —
-when matched — a HashScan explorer deep-link.
+`verify:hbar` / `verify:hts` print `PAID` / `NOT PAID` plus the full `PaymentResult` (status,
+amount, payer), and — when matched — a HashScan explorer deep-link.
+
+`verify:usdc` reads `HEDERA_NETWORK`, `RECEIVER`, `AMOUNT`, `MEMO`, and an optional `USDC_TOKEN_ID`
+override (for a dev/testnet mock token), then prints `PAID` / `NOT PAID`, the status, transaction id,
+payer, amount, and a HashScan link when matched. With no `USDC_TOKEN_ID` it uses the verified
+canonical USDC token id for the network.
 
 ## Key idea: server-side verification
 

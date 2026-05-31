@@ -26,7 +26,7 @@ interface PaymentResult {
     | "expired"
     | "failed"
   receiver: string
-  asset: "HBAR" | { tokenId: string; decimals: number }
+  asset: "HBAR" | { tokenId: string; decimals: number; symbol?: string }
   transactionId?: string
   payer?: string
   amount?: string
@@ -43,6 +43,17 @@ interface PaymentResult {
 
 Adds `tokenId: string` and optional `decimals?: number` (auto-fetched when omitted).
 
-## waitForHbarPayment / waitForHtsPayment
+## verifyUsdcPayment(params)
+
+Wrapper over `verifyHtsPayment` that resolves the verified USDC token id for `network` (**required**;
+mainnet `0.0.456858`, testnet `0.0.429274`, previewnet throws `UnsupportedAssetError`) and forces
+`decimals = 6`. Accepts an optional `tokenId` override (dev/mock tokens, still 6 decimals). The
+result `asset` is tagged `{ tokenId, decimals: 6, symbol: "USDC" }`. See
+[Verify a USDC payment](/guide/verify-usdc-payment).
+
+Also exported: `getUsdcTokenId(network)`, `USDC_TOKEN_IDS`, `USDC_DECIMALS` (= 6), and
+`isUsdcPaymentResult(result)`.
+
+## waitForHbarPayment / waitForHtsPayment / waitForUsdcPayment
 
 Adds `timeoutMs?`, `pollIntervalMs?`, `signal?`. Resolves `confirmed` or `expired`.

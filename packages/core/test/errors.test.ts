@@ -4,6 +4,7 @@ import {
   InvalidAmountError,
   InvalidParamsError,
   NotFoundError,
+  UnsupportedAssetError,
 } from "../src/errors.js"
 
 describe("error hierarchy", () => {
@@ -25,5 +26,12 @@ describe("error hierarchy", () => {
     const mid = new NotFoundError("mid", { cause: root })
     const top = new InvalidParamsError("top", { cause: mid })
     expect(top.walk((e) => e === root)).toBe(root)
+  })
+  it("UnsupportedAssetError extends HbarKitError, sets name, and carries docsPath", () => {
+    const e = new UnsupportedAssetError("no USDC here", { docsPath: "/guide/verify-usdc-payment" })
+    expect(e).toBeInstanceOf(HbarKitError)
+    expect(e).toBeInstanceOf(Error)
+    expect(e.name).toBe("UnsupportedAssetError")
+    expect(e.docsPath).toBe("/guide/verify-usdc-payment")
   })
 })

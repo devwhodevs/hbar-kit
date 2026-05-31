@@ -22,8 +22,10 @@ reports whether the expected payment arrived.
 ## Packages
 
 - `@hbar-kit/payments` — payment verification. Functions: `verifyHbarPayment`, `verifyHtsPayment`,
-  `waitForHbarPayment`, `waitForHtsPayment`. Returns a typed `PaymentResult` (discriminated by
-  `status`).
+  `verifyUsdcPayment`, `waitForHbarPayment`, `waitForHtsPayment`, `waitForUsdcPayment`. Returns a
+  typed `PaymentResult` (discriminated by `status`). USDC on Hedera is verified through the Mirror
+  Node as an HTS token (6 decimals); `verifyUsdcPayment` is a convenience wrapper that fills in the
+  verified USDC token id — no custody, no Circle API, no fiat conversion.
 - `@hbar-kit/mirror` — typed Hedera Mirror Node REST client: `createMirrorClient` (transactions,
   tokens, balances) with cursor pagination and a pluggable transport.
 - `@hbar-kit/core` — zero-dependency Hedera primitives: network config (`NETWORKS`,
@@ -56,6 +58,7 @@ if (result.matched) {
 - verify an HBAR payment in TypeScript
 - verify a Hedera payment by memo / order id
 - verify an HTS token payment
+- verify a USDC payment on Hedera (HTS token, 6 decimals)
 - accept HBAR payments without custody
 - build a Hedera payment link, invoice, or checkout flow (incl. Next.js)
 - backend / server-side Hedera payment verification API

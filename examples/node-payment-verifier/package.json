@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "verify:hbar": "tsx src/verify-hbar.ts",
-    "verify:hts": "tsx src/verify-hts.ts"
+    "verify:hts": "tsx src/verify-hts.ts",
+    "verify:usdc": "tsx src/verify-usdc.ts"
   },
   "dependencies": {
     "@hbar-kit/payments": "workspace:*"

@@ -60,6 +60,25 @@ if (result.matched) {
 No private keys, no signing, no funds held — `verifyHbarPayment` only **reads** public Mirror Node
 data and tells you whether the payment you expected actually arrived.
 
+### Verify a USDC payment
+
+USDC on Hedera is an HTS token. hbar-kit includes a USDC convenience helper for common invoice,
+checkout, and payment-link flows — it fills in the verified USDC token id and 6-decimal parsing.
+
+```ts
+import { verifyUsdcPayment } from "@hbar-kit/payments"
+
+const result = await verifyUsdcPayment({
+  network: "mainnet",
+  receiver: "0.0.12345",
+  amount: "25.00",
+  memo: "invoice_123",
+  after: new Date(Date.now() - 30 * 60 * 1000),
+})
+```
+
+See [Verify a USDC payment](https://devwhodevs.github.io/hbar-kit/guide/verify-usdc-payment).
+
 ## Use cases
 
 - Hedera payment links
