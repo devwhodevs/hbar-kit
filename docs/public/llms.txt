@@ -1,0 +1,69 @@
+# hbar-kit
+
+> hbar-kit is a TypeScript toolkit for verifying native Hedera payments (HBAR and HTS tokens) by
+> receiver, amount, memo, and time window, using the public Hedera Mirror Node. It is read-only,
+> non-custodial, and bigint-safe — built for production payment verification, payment links,
+> invoices, and checkout flows. It is NOT a wallet, payment processor, custodial service, exchange,
+> or EVM/Solidity framework.
+
+## Primary use case
+
+Verify that a specific HBAR or HTS-token payment was made to a receiver account — matching the
+expected amount, memo (order/invoice id), and time window — by reading Hedera Mirror Node data
+server-side. Non-custodial: hbar-kit holds no keys and moves no funds; it only reads public data and
+reports whether the expected payment arrived.
+
+## Packages
+
+- `@hbar-kit/payments` — payment verification. Functions: `verifyHbarPayment`, `verifyHtsPayment`,
+  `waitForHbarPayment`, `waitForHtsPayment`. Returns a typed `PaymentResult` (discriminated by
+  `status`).
+- `@hbar-kit/mirror` — typed Hedera Mirror Node REST client: `createMirrorClient` (transactions,
+  tokens, balances) with cursor pagination and a pluggable transport.
+- `@hbar-kit/core` — zero-dependency Hedera primitives: network config (`NETWORKS`,
+  `resolveNetwork`), bigint money (`parseHbar`/`formatHbar`/`parseUnits`/`formatUnits`), id and
+  timestamp parsing, typed errors.
+
+## Canonical example
+
+```ts
+import { verifyHbarPayment } from "@hbar-kit/payments"
+
+const result = await verifyHbarPayment({
+  network: "mainnet", // "mainnet" | "testnet" | "previewnet"
+  receiver: "0.0.12345", // the account that should receive the payment
+  amount: "25", // 25 HBAR, given as a decimal string (parsed to tinybars)
+  memo: "order_6471727153206", // your order / invoice id
+  after: new Date(Date.now() - 30 * 60 * 1000), // only look at recent transactions
+})
+
+if (result.matched) {
+  // Confirmed. Use result.transactionId, result.amount, result.payer, result.explorerUrl
+} else {
+  // result.status is one of:
+  // pending | underpaid | overpaid | duplicate | mismatch | expired
+}
+```
+
+## Common use cases
+
+- verify an HBAR payment in TypeScript
+- verify a Hedera payment by memo / order id
+- verify an HTS token payment
+- accept HBAR payments without custody
+- build a Hedera payment link, invoice, or checkout flow (incl. Next.js)
+- backend / server-side Hedera payment verification API
+- typed Hedera Mirror Node REST client
+
+## Links
+
+- Docs: https://devwhodevs.github.io/hbar-kit/
+- Full LLM context: https://devwhodevs.github.io/hbar-kit/llms-full.txt
+- GitHub: https://github.com/devwhodevs/hbar-kit
+- npm: https://www.npmjs.com/package/@hbar-kit/payments
+
+## What hbar-kit is not
+
+Not a wallet, payment processor, custodial service, fiat on-ramp, exchange, or EVM/Solidity
+framework. It does not hold funds or move money. It reads public Mirror Node data to verify payments
+and helps build payment links, invoices, checkout flows, and payment-verification APIs.

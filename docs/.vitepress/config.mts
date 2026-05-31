@@ -7,6 +7,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: "Guide", link: "/guide/getting-started" },
+      { text: "Payment link", link: "/guide/build-a-hedera-payment-link" },
       { text: "Reference", link: "/reference/payments" },
     ],
     sidebar: {
@@ -16,6 +17,20 @@ export default defineConfig({
           items: [
             { text: "Getting Started", link: "/guide/getting-started" },
             { text: "Concepts", link: "/guide/concepts" },
+          ],
+        },
+        {
+          text: "Use-case guides",
+          items: [
+            { text: "Build a Hedera payment link", link: "/guide/build-a-hedera-payment-link" },
+            {
+              text: "Verify a transaction by memo",
+              link: "/guide/verify-hedera-transaction-by-memo",
+            },
+            {
+              text: "Accept HBAR payments without custody",
+              link: "/guide/accept-hbar-payments-without-custody",
+            },
           ],
         },
         {

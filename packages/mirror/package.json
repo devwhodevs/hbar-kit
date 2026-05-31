@@ -1,7 +1,7 @@
 {
   "name": "@hbar-kit/mirror",
   "version": "0.1.0",
-  "description": "Typed Hedera Mirror Node REST client.",
+  "description": "Typed Hedera Mirror Node REST API client for TypeScript: transactions, tokens, balances, with cursor pagination.",
   "license": "MIT",
   "homepage": "https://devwhodevs.github.io/hbar-kit/",
   "repository": {
@@ -13,10 +13,12 @@
   "keywords": [
     "hedera",
     "hbar",
-    "hts",
+    "hashgraph",
     "mirror-node",
-    "rest",
-    "typescript"
+    "mirror-node-client",
+    "hedera-rest-api",
+    "typescript",
+    "sdk"
   ],
   "type": "module",
   "sideEffects": false,
