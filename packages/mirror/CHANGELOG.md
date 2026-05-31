@@ -1,5 +1,13 @@
 # @hbar-kit/mirror
 
+## 0.1.2
+
+### Patch Changes
+
+- ed52683: Rebuild npm provenance attestations from current main (the previous release's source commit was replaced by a history rewrite). No code or API changes.
+- Updated dependencies [ed52683]
+  - @hbar-kit/core@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes
