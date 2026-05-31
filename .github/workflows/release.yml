@@ -8,19 +8,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
+      # Node 22.14+ and npm 11.5.1+ are required for npm OIDC trusted publishing.
       - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: pnpm }
+        with: { node-version: 22, cache: pnpm }
+      - run: npm install -g npm@latest # ensure npm >= 11.5.1 for OIDC
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      # Write the npm auth token ourselves so it is unambiguously used at publish
-      # time (avoids the setup-node registry-url / NODE_AUTH_TOKEN mismatch).
-      - run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > "$HOME/.npmrc"
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # No NPM_TOKEN: auth is the GitHub OIDC token (id-token: write) + the per-package
+      # Trusted Publisher configured on npmjs.com. Provenance stays on via .npmrc.
       - uses: changesets/action@v1
         with: { publish: pnpm release }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: "true"
