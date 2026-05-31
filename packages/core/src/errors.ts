@@ -85,3 +85,10 @@ export class PaymentVerificationError extends HbarKitError {
     this.name = "PaymentVerificationError"
   }
 }
+/** A requested asset is not available on the selected network (e.g. USDC on previewnet). */
+export class UnsupportedAssetError extends HbarKitError {
+  constructor(message: string, opts?: HbarKitErrorOptions) {
+    super(message, opts)
+    this.name = "UnsupportedAssetError"
+  }
+}

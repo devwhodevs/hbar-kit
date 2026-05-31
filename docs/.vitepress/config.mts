@@ -39,6 +39,7 @@ export default defineConfig({
           items: [
             { text: "Verify an HBAR payment", link: "/guide/verify-hbar" },
             { text: "Verify an HTS token payment", link: "/guide/verify-hts" },
+            { text: "Verify a USDC payment", link: "/guide/verify-usdc-payment" },
             { text: "Wait for a payment", link: "/guide/wait-for-payment" },
             { text: "Use a custom Mirror Node", link: "/guide/custom-mirror-node" },
             { text: "Partial & duplicate payments", link: "/guide/partial-and-duplicate" },

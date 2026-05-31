@@ -35,14 +35,23 @@ Business-level verification on top of `@hbar-kit/mirror`. Exports:
 - `verifyHbarPayment(params): Promise<PaymentResult>` — verify an HBAR payment.
 - `verifyHtsPayment(params): Promise<PaymentResult>` — verify an HTS token payment (auto-resolves
   token decimals from the Mirror Node if `decimals` is omitted, and caches them).
+- `verifyUsdcPayment(params): Promise<PaymentResult>` — verify a USDC payment. Convenience wrapper
+  over `verifyHtsPayment` that resolves the verified USDC token id for `network` (required;
+  mainnet `0.0.456858`, testnet `0.0.429274`, previewnet throws) and forces `decimals = 6`. Accepts
+  an optional `tokenId` override for dev/mock tokens; tags the result `asset` as
+  `{ tokenId, decimals: 6, symbol: "USDC" }`. USDC is verified through the Mirror Node as an HTS
+  token — no custody, no Circle API, no fiat conversion.
 - `waitForHbarPayment(params & WaitOptions): Promise<PaymentResult>` — poll until the payment is
   confirmed or the timeout elapses.
 - `waitForHtsPayment(params & WaitOptions): Promise<PaymentResult>` — same, for HTS.
+- `waitForUsdcPayment(params & WaitOptions): Promise<PaymentResult>` — same, for USDC.
+- `getUsdcTokenId(network)`, `USDC_TOKEN_IDS`, `USDC_DECIMALS` (= 6), `isUsdcPaymentResult(result)`
+  — USDC registry/helpers.
 - `hashscanTxUrl(network, consensusTimestamp, transactionId): string` — build a HashScan explorer
   link.
 - Lower-level helpers: `netToReceiver`, `memoMatches`, `classifyAmount`.
 - Types: `PaymentResult`, `PaymentStatus`, `PaymentMatch`, `PaymentAsset`, `MemoComparison`,
-  `VerifyHbarParams`, `VerifyHtsParams`, `VerifyBaseParams`, `WaitOptions`.
+  `VerifyHbarParams`, `VerifyHtsParams`, `VerifyUsdcParams`, `VerifyBaseParams`, `WaitOptions`.
 
 `verify*` params (`VerifyBaseParams`):
 
@@ -57,6 +66,8 @@ Business-level verification on top of `@hbar-kit/mirror`. Exports:
 - `after?: Date | string`, `before?: Date | string` — restrict the time window.
 - `client?: MirrorClient` — reuse a pre-built Mirror client.
 - HTS only (`VerifyHtsParams`): `tokenId: string`, `decimals?: number`.
+- USDC only (`VerifyUsdcParams`): `network` required; `tokenId?` optional override (decimals are
+  always 6).
 
 `WaitOptions`: `timeoutMs?` (default 10 min), `pollIntervalMs?` (default 3000 ms), `signal?`
 (AbortSignal).
@@ -89,7 +100,7 @@ interface PaymentResult {
   matched: boolean // true ONLY when the expected payment is satisfied by exactly one tx
   status: PaymentStatus
   receiver: string
-  asset: "HBAR" | { tokenId: string; decimals: number }
+  asset: "HBAR" | { tokenId: string; decimals: number; symbol?: string } // symbol:"USDC" via verifyUsdcPayment
   transactionId?: string
   payer?: string
   amount?: string // human-readable, e.g. "25"

@@ -16,3 +16,7 @@ const result = await waitForHbarPayment({
 
 Pass an `AbortSignal` as `signal` to cancel early. Polling stops immediately on a confirmed,
 duplicate, or overpaid result.
+
+The same polling exists for tokens — `waitForHtsPayment` and
+[`waitForUsdcPayment`](/guide/verify-usdc-payment) — with identical `timeoutMs` / `pollIntervalMs` /
+`signal` options.

@@ -10,7 +10,7 @@ export type PaymentStatus =
   | "expired"
   | "failed"
 
-export type PaymentAsset = "HBAR" | { tokenId: string; decimals: number }
+export type PaymentAsset = "HBAR" | { tokenId: string; decimals: number; symbol?: string }
 
 export interface PaymentMatch {
   transactionId: string

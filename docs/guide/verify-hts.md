@@ -15,3 +15,6 @@ const result = await verifyHtsPayment({
 ```
 
 If you omit `decimals`, hbar-kit fetches it from the token info endpoint and caches it.
+
+> Paying in **USDC**? Use [`verifyUsdcPayment`](/guide/verify-usdc-payment) — a thin wrapper that
+> fills in the verified USDC token id and 6-decimal parsing for you.

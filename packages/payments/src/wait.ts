@@ -4,6 +4,7 @@ import {
   type VerifyHbarParams,
   type VerifyHtsParams,
 } from "./verify.js"
+import { verifyUsdcPayment, type VerifyUsdcParams } from "./usdc.js"
 import type { PaymentResult } from "./types.js"
 
 export interface WaitOptions {
@@ -45,4 +46,7 @@ export function waitForHbarPayment(p: VerifyHbarParams & WaitOptions): Promise<P
 }
 export function waitForHtsPayment(p: VerifyHtsParams & WaitOptions): Promise<PaymentResult> {
   return poll(() => verifyHtsPayment(p), p)
+}
+export function waitForUsdcPayment(p: VerifyUsdcParams & WaitOptions): Promise<PaymentResult> {
+  return poll(() => verifyUsdcPayment(p), p)
 }
