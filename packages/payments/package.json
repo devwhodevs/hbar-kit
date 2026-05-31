@@ -1,6 +1,6 @@
 {
   "name": "@hbar-kit/payments",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Verify native Hedera payments (HBAR & HTS) by receiver, amount, memo, and time window via the Mirror Node — read-only, non-custodial, bigint-safe.",
   "license": "MIT",
   "homepage": "https://devwhodevs.github.io/hbar-kit/",
