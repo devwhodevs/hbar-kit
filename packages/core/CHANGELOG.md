@@ -1,5 +1,11 @@
 # @hbar-kit/core
 
+## 0.1.3
+
+### Patch Changes
+
+- 56f5cd8: Release via npm OIDC trusted publishing (no long-lived token). First release on the tokenless CI flow; provenance remains automatic. No code or API changes.
+
 ## 0.1.2
 
 ### Patch Changes
