@@ -1,6 +1,6 @@
 {
   "name": "@hbar-kit/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Zero-dependency Hedera primitives for TypeScript: network config, bigint money (tinybars & HTS decimals), id/timestamp parsing, errors.",
   "license": "MIT",
   "homepage": "https://devwhodevs.github.io/hbar-kit/",

@@ -1,5 +1,14 @@
 # @hbar-kit/payments
 
+## 0.1.1
+
+### Patch Changes
+
+- 4ce8451: Improve npm discoverability: clearer package descriptions and Hedera payment / Mirror Node keywords. No API changes.
+- Updated dependencies [4ce8451]
+  - @hbar-kit/core@0.1.1
+  - @hbar-kit/mirror@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
