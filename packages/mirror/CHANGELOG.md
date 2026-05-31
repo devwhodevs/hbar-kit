@@ -1,5 +1,12 @@
 # @hbar-kit/mirror
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [48499f8]
+  - @hbar-kit/core@0.2.0
+
 ## 0.1.3
 
 ### Patch Changes
