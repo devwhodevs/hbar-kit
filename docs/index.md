@@ -19,3 +19,5 @@ features:
   - title: Every edge case
     details: Exact, partial, over, duplicate, wrong-memo, wrong-token, out-of-window — all explicit.
 ---
+
+> **Status:** v0.1.x — beta, pre-1.0. Published to npm and tested; usable today for HBAR/HTS payment verification. The public API may change before 1.0, so pin a version.

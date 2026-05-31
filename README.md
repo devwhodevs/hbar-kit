@@ -7,10 +7,14 @@
 
 **hbar-kit is a TypeScript toolkit for verifying native Hedera payments.** It confirms whether an
 HBAR or HTS-token payment reached a receiver account — by amount, memo, and time window — by reading
-the public Hedera Mirror Node. Read-only, non-custodial, bigint-safe, and built for production
-payment verification.
+the public Hedera Mirror Node. Read-only, non-custodial, bigint-safe, and built for real payment
+verification.
 
 > viem-like DX for **native** Hedera: verify a payment in under 20 lines. No private keys, no custody.
+
+> **Status: v0.1.x (beta).** Published to npm and tested, usable today for HBAR/HTS payment
+> verification. Pre-1.0 — the public API may still change before 1.0, so pin a version. The
+> wallet/React/Next.js/indexer packages (Phases 2–5) are planned, not yet built.
 
 ## Who it's for
 
@@ -78,9 +82,9 @@ flows, and payment-verification APIs.
 
 | Package              | Status  | Purpose                                                           |
 | -------------------- | ------- | ----------------------------------------------------------------- |
-| `@hbar-kit/core`     | stable  | Primitives: network config, bigint money, ids, timestamps, errors |
-| `@hbar-kit/mirror`   | stable  | Typed Mirror Node REST client                                     |
-| `@hbar-kit/payments` | stable  | HBAR/HTS payment verification                                     |
+| `@hbar-kit/core`     | 0.1 (beta) | Primitives: network config, bigint money, ids, timestamps, errors |
+| `@hbar-kit/mirror`   | 0.1 (beta) | Typed Mirror Node REST client                                     |
+| `@hbar-kit/payments` | 0.1 (beta) | HBAR/HTS payment verification                                     |
 | `@hbar-kit/wallet`   | Phase 2 | Native Hedera wallet signing                                      |
 | `@hbar-kit/react`    | Phase 3 | React hooks                                                       |
 | `@hbar-kit/next`     | Phase 4 | Next.js server helpers                                            |

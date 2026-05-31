@@ -6,6 +6,12 @@
 > invoices, and checkout flows. It is NOT a wallet, payment processor, custodial service, exchange,
 > or EVM/Solidity framework.
 
+## Status
+
+Version 0.1.x — beta, pre-1.0. Published to npm and tested; usable today for HBAR/HTS payment
+verification. The public API may change before 1.0 (pin a version). The wallet, React, Next.js, and
+indexer packages are planned, not yet released.
+
 ## Primary use case
 
 Verify that a specific HBAR or HTS-token payment was made to a receiver account — matching the
