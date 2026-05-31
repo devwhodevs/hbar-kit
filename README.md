@@ -10,7 +10,7 @@ HBAR or HTS-token payment reached a receiver account — by amount, memo, and ti
 the public Hedera Mirror Node. Read-only, non-custodial, bigint-safe, and built for real payment
 verification.
 
-> viem-like DX for **native** Hedera: verify a payment in under 20 lines. No private keys, no custody.
+> Verify a **native** Hedera payment in under 20 lines. No private keys, no custody.
 
 > **Status: v0.1.x (beta).** Published to npm and tested, usable today for HBAR/HTS payment
 > verification. Pre-1.0 — the public API may still change before 1.0, so pin a version. The

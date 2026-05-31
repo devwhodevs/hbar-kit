@@ -2,8 +2,8 @@
 layout: home
 hero:
   name: hbar-kit
-  text: viem-like DX for native Hedera
-  tagline: Verify HBAR & HTS payments against the Mirror Node in under 20 lines.
+  text: Native Hedera payment verification for TypeScript
+  tagline: Verify HBAR & HTS payments by receiver, amount, memo & time window against the Mirror Node — read-only, non-custodial, in under 20 lines.
   actions:
     - theme: brand
       text: Get Started
